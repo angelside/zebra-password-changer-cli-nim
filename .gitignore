@@ -1,0 +1,8 @@
+.vscode/
+.idea/
+nimcache/
+build/*
+bin/*
+*.exe
+*.so
+__*
