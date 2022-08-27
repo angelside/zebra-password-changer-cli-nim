@@ -14,7 +14,7 @@ No installation, no dependencies, it's in binary format.
 
 ## 🚀 Compilation
 
-> ⚠️ You must compile it yourself until the any binary is released.
+> ⚠️ You must compile it yourself until any binary is released.
 
 This tool is build with **Nim** programming language. For binary compilation you can use below command inside the tool root directory. _The custom compilation settings in the `config.nims` file will be used._ The command will create `./bin/zebra-password-changer` binary file.
 
