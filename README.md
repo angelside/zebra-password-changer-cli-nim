@@ -16,13 +16,15 @@ No installation, no dependencies, it's in binary format.
 
 > ⚠️ You must compile it yourself until any binary is released.
 
-This tool is build with **Nim** programming language. For binary compilation you can use below command inside the tool root directory. _The custom compilation settings in the `config.nims` file will be used._ The command will create `./bin/zebra-password-changer` binary file.
+This cli tool is build with **Nim** programming language. For binary compilation you need to install [nim toolchain](https://nim-lang.org/install.html) and you can use below command inside the tool root directory. _The custom compilation configurations in the `config.nims` file will be used._ The command will create `./bin/zebra-password-changer` binary file.
+
+Default compilation
 
 ```bash
 $ nim c ./src/app.nim
 ```
 
-For custom binary file name
+Custom binary file name sample
 
 ```bash
 $ nim c -o:./bin/my-super-duper-cli-app ./src/app.nim
@@ -37,13 +39,15 @@ $ nim c ./src/app.nim
 $ ./bin/zebra-password-changer help
 ```
 
+> ℹ️ It's a single binary file, you can move file anywhere and/or can add to PATH.
+
 
 ## 🔨 Usage
 
 CLI tool has two parameter, and they are the IP address of the printer and new password (4 digit, only numbers). _We don't have to know current password._
 
 ```bash
-$ zebra-password-changer <IP_ADDRESS> <PASSWORD>
+$ ./bin/zebra-password-changer <IP_ADDRESS> <PASSWORD>
 ```
 
 ### 📋 Sample usages and results
@@ -51,7 +55,7 @@ $ zebra-password-changer <IP_ADDRESS> <PASSWORD>
 successful
 
 ```
-$ zebra-password-changer <IP_ADDRESS> <PASSWORD>
+$ ./bin/zebra-password-changer <IP_ADDRESS> <PASSWORD>
 == Zebra password changer ==
 
 [OK] 172.18.197.202 : password has been changed.
@@ -60,17 +64,17 @@ $ zebra-password-changer <IP_ADDRESS> <PASSWORD>
 with errors
 
 ```
-$ zebra-password-changer <IP_ADDRESS> <PASSWORD>
+$ ./bin/zebra-password-changer <IP_ADDRESS> <PASSWORD>
 == Zebra password changer ==
 
 [ERROR] IP adress is invalid.
 [ERROR] Password is invalid! Please enter a 4 digit number.
 ```
 
-OSError/device offline
+OSError / device offline
 
 ```
-$ zebra-password-changer <IP_ADDRESS> <PASSWORD>
+$ ./bin/zebra-password-changer <IP_ADDRESS> <PASSWORD>
 == Zebra password changer ==
 
 [ERROR] Failed to connect: No route to host
@@ -79,29 +83,29 @@ $ zebra-password-changer <IP_ADDRESS> <PASSWORD>
 version command
 
 ```
-$ zebra-password-changer version
+$ ./bin/zebra-password-changer version
 == Zebra password changer ==
 
 VERSION
-  app v0.1.0 linux-amd64 nim-v1.6.6
+    zebra-password-changer v0.1.0 - linux-amd64 nim-v1.6.6
 ```
 
 help command
 
 ```
-$ zebra-password-changer help
+$ ./bin/zebra-password-changer help
 == Zebra password changer ==
 
 USAGE
-  $ app <IP_ADDRESS> <PASSWORD>
-  $ app [command]
+    zebra-password-changer <IP_ADDRESS> <PASSWORD>
+    zebra-password-changer  [command]
 
 COMMANDS
-  help     show CLI help
-  version  show CLI version
+    help     show CLI help
+    version  show CLI version
 
 DESCRIPTION
-  CLI tool that allows changing Zebra printers password
+    CLI tool that allows changing Zebra printers password
 ```
 
 ## 💥 Features
