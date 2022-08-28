@@ -29,7 +29,7 @@ let config = (
 proc print_version() =
     # Example: zebra-password-changer v0.1.0 linux-amd64 nim-v1.6.6
     styledEcho styleBright, fgBlue, "VERSION", resetStyle
-    styledEcho fgDefault, "  ", config.app_file_name, " v", config.app_version, " ", hostOS, "-", hostCPU ," nim-v", NimVersion, resetStyle
+    styledEcho fgDefault, "    ", config.app_file_name, " v", config.app_version, " | ", hostOS, "-", hostCPU ," nim-v", NimVersion, resetStyle
 
     quit()
 
@@ -38,17 +38,17 @@ proc print_version() =
 proc print_help() =
     # Usage: app <IP_ADDRESS> <PASSWORD>
     styledEcho styleBright, fgCyan, "USAGE", resetStyle
-    styledEcho fgDefault, "  $ app <IP_ADDRESS> <PASSWORD>", resetStyle
-    styledEcho fgDefault, "  $ app [command]", resetStyle
+    styledEcho fgDefault, fmt"    {config.app_file_name} <IP_ADDRESS> <PASSWORD>", resetStyle
+    styledEcho fgDefault, fmt"    {config.app_file_name}  [command]", resetStyle
     echo ""
 
     styledEcho styleBright, fgCyan, "COMMANDS", resetStyle
-    styledEcho fgDefault, "  help", resetStyle, fgWhite, "     show CLI help", resetStyle
-    styledEcho fgDefault, "  version", resetStyle, fgWhite, "  show CLI version", resetStyle
+    styledEcho fgDefault, "    help", resetStyle, fgWhite, "     show CLI help", resetStyle
+    styledEcho fgDefault, "    version", resetStyle, fgWhite, "  show CLI version", resetStyle
     echo ""
 
     styledEcho styleBright, fgCyan, "DESCRIPTION", resetStyle
-    styledEcho fgDefault, "  CLI tool that allows changing Zebra printers password", resetStyle
+    styledEcho fgDefault, "    CLI tool that allows changing Zebra printers password", resetStyle
 
     quit()
 
@@ -93,16 +93,19 @@ proc check_ip_and_password(input_ip_address: string, input_password: string) =
     let valid_ip_address = validate.ip_address(input_ip_address)
     let valid_password   = validate.password(input_password, config.password_total_char)
 
+    let invalid_ip_msg       = "IP adress is invalid!"
+    let invalid_password_msg = fmt"Password is invalid! Please enter a {config.password_total_char} digit number."
+
     if not valid_ip_address and not valid_password:
-        error_msg("IP adress is invalid!")
-        error_msg("Password is invalid! Please enter a 4 digit number.")
+        error_msg(invalid_ip_msg)
+        error_msg(invalid_password_msg)
         usage_help_msg()
         quit()
     elif not valid_ip_address:
-        error_msg("IP adress is invalid!")
+        error_msg(invalid_ip_msg)
         quit()
     elif not valid_password:
-        error_msg("Password is invalid! Please enter a 4 digit number.")
+        error_msg(invalid_password_msg)
         quit()
 
 
@@ -112,7 +115,7 @@ proc socket_request(ip_address: string, port: int, timeout: int, zpl_code: strin
     # Attempt to connect
     try:
         socket.connect(ip_address, Port(port), timeout = timeout)
-        socket.send(fmt"{zpl_code}")
+        socket.send(zpl_code)
         styledEcho fgGreen, "[OK] ", fgBlue, ip_address, resetStyle," : password has been changed."
         defer: socket.close()
     except OSError as e:
