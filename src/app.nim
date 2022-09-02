@@ -27,7 +27,10 @@ let config = (
 
 # Prints version and exit
 proc print_version() =
-    # Example: zebra-password-changer v0.1.0 linux-amd64 nim-v1.6.6
+    #[
+        VERSION
+            zebra-password-changer v0.1.0 | linux-amd64 nim-v1.6.6
+    ]#
     styledEcho styleBright, fgBlue, "VERSION", resetStyle
     styledEcho fgDefault, "    ", config.app_file_name, " v", config.app_version, " | ", hostOS, "-", hostCPU ," nim-v", NimVersion, resetStyle
 
@@ -36,7 +39,18 @@ proc print_version() =
 
 # Print cli help and exit
 proc print_help() =
-    # Usage: app <IP_ADDRESS> <PASSWORD>
+    #[
+        USAGE
+            zebra-password-changer <IP_ADDRESS> <PASSWORD>
+            zebra-password-changer  [command]
+
+        COMMANDS
+            help     show CLI help
+            version  show CLI version
+
+        DESCRIPTION
+            CLI tool that allows changing Zebra printers password
+    ]#
     styledEcho styleBright, fgCyan, "USAGE", resetStyle
     styledEcho fgDefault, fmt"    {config.app_file_name} <IP_ADDRESS> <PASSWORD>", resetStyle
     styledEcho fgDefault, fmt"    {config.app_file_name}  [command]", resetStyle
@@ -55,13 +69,19 @@ proc print_help() =
 
 # Error message
 proc error_msg(msg: string, exit = false) =
+    # [ERROR] Failed to connect: No route to host
     styledEcho fgRed, "[ERROR]", resetStyle, " ", msg
     if exit:
         quit()
 
 
-# Use 'zebra-password-changer help' for help
+# Usege help message
 proc usage_help_msg() =
+    #[
+        [ERROR] Wrong command or argument!
+
+        use 'zebra-password-changer help' for help
+    ]#
     let help_text = fmt"use '{config.app_file_name} help' for help"
     styledEcho "\n",fgWhite, help_text, resetStyle
 
