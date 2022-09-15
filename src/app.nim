@@ -24,17 +24,6 @@ proc error_msg(msg: string, exit = false) =
         quit()
 
 
-# Usege help message
-proc usage_help_msg() =
-    #[
-        [ERROR] Wrong command or argument!
-
-        use 'zebra-password-changer help' for help
-    ]#
-    let help_text = fmt"use '{conf.app_file_name} help' for help"
-    styledEcho "\n",fgWhite, help_text, resetStyle
-
-
 proc check_arguments() =
     # No any argument ->  Show help
     if paramCount() == 0:
@@ -54,7 +43,7 @@ proc check_arguments() =
         # Not have 2 argument -> error & exit
         if paramCount() != 2:
             error_msg("Wrong command or argument!")
-            usage_help_msg()
+            print.help_short()
             quit()
 
 
@@ -68,7 +57,7 @@ proc check_ip_and_password(input_ip_address: string, input_password: string) =
     if not valid_ip_address and not valid_password:
         error_msg(invalid_ip_msg)
         error_msg(invalid_password_msg)
-        usage_help_msg()
+        print.help_short()
         quit()
     elif not valid_ip_address:
         error_msg(invalid_ip_msg)

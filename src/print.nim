@@ -41,3 +41,13 @@ proc help*() =
     styledEcho fgDefault, "    CLI tool that allows changing Zebra printers password", resetStyle
 
     quit()
+
+# Usege help message
+proc help_short*() =
+    #[
+        [ERROR] Wrong command or argument!
+
+        use 'zebra-password-changer help' for help
+    ]#
+    let help_text = fmt"use '{conf.app_file_name} help' for help"
+    styledEcho "\n",fgWhite, help_text, resetStyle
