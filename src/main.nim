@@ -47,7 +47,6 @@ proc check_arguments() =
         quit()
 
 
-
 proc check_ip_and_password(input_ip_address: string, input_password: string) =
     let valid_ip_address = validate.ip_address(input_ip_address)
     let valid_password   = validate.password(input_password, conf.password_total_char)
@@ -114,4 +113,3 @@ when isMainModule:
     print.app_title()
 
     main()
-
