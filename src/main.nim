@@ -30,8 +30,8 @@ proc check_arguments() =
         #error_msg("No operation specified!")
         print.help()
 
-    # Get all the arguments by index
-    for paramIndex in 1 .. paramCount():
+    # Only 1 argument, check if it's "help" or "version"
+    if paramCount() == 1:
         # Argument is "help" -> show help & exit
         if paramStr(1) == "help":
             print.help()
@@ -40,11 +40,12 @@ proc check_arguments() =
         if paramStr(1) == "version":
             print.version()
 
-        # Not have 2 argument -> error & exit
-        if paramCount() != 2:
-            error_msg("Wrong command or argument!")
-            print.help_short()
-            quit()
+    # Not have 2 argument -> error & exit
+    if paramCount() != 2:
+        error_msg("Wrong command or argument!")
+        print.help_short()
+        quit()
+
 
 
 proc check_ip_and_password(input_ip_address: string, input_password: string) =
