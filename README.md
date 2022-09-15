@@ -21,13 +21,13 @@ This cli tool is build with **Nim** programming language. For binary compilation
 Default compilation
 
 ```bash
-$ nim c ./src/app.nim
+$ nim c ./src/main.nim
 ```
 
 Custom binary file name sample
 
 ```bash
-$ nim c -o:./bin/my-super-duper-cli-app ./src/app.nim
+$ nim c -o:./bin/my-super-duper-cli-app ./src/main.nim
 ```
 
 Full walkthrough can be like below
@@ -35,7 +35,7 @@ Full walkthrough can be like below
 ```bash
 $ git clone https://github.com/angelside/zebra-password-changer-cli-nim.git
 $ cd zebra-password-changer-cli-nim
-$ nim c ./src/app.nim
+$ nim c ./src/main.nim
 $ ./bin/zebra-password-changer help
 ```
 
