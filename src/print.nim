@@ -38,7 +38,7 @@ proc help*() =
     echo ""
 
     styledEcho styleBright, fgCyan, "DESCRIPTION", resetStyle
-    styledEcho fgDefault, "    CLI tool that allows changing Zebra printers password", resetStyle
+    styledEcho fgDefault, "    ", conf.app_description, resetStyle
 
     quit()
 
