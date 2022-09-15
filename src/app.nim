@@ -12,59 +12,8 @@ import net
 import os
 
 from validate import nil
-
-
-let config = (
-    app_title     : "== Zebra password changer ==",
-    app_version   : "0.1.0",
-    app_file_name : getAppFilename().extractFilename(), # Directly accessing the app name
-
-    printer_port  : 9100,
-    socket_timeout: 3000,
-    password_total_char: 4
-)
-
-
-# Prints version and exit
-proc print_version() =
-    #[
-        VERSION
-            zebra-password-changer v0.1.0 | linux-amd64 nim-v1.6.6
-    ]#
-    styledEcho styleBright, fgBlue, "VERSION", resetStyle
-    styledEcho fgDefault, "    ", config.app_file_name, " v", config.app_version, " | ", hostOS, "-", hostCPU ," nim-v", NimVersion, resetStyle
-
-    quit()
-
-
-# Print cli help and exit
-proc print_help() =
-    #[
-        USAGE
-            zebra-password-changer <IP_ADDRESS> <PASSWORD>
-            zebra-password-changer  [command]
-
-        COMMANDS
-            help     show CLI help
-            version  show CLI version
-
-        DESCRIPTION
-            CLI tool that allows changing Zebra printers password
-    ]#
-    styledEcho styleBright, fgCyan, "USAGE", resetStyle
-    styledEcho fgDefault, fmt"    {config.app_file_name} <IP_ADDRESS> <PASSWORD>", resetStyle
-    styledEcho fgDefault, fmt"    {config.app_file_name}  [command]", resetStyle
-    echo ""
-
-    styledEcho styleBright, fgCyan, "COMMANDS", resetStyle
-    styledEcho fgDefault, "    help", resetStyle, fgWhite, "     show CLI help", resetStyle
-    styledEcho fgDefault, "    version", resetStyle, fgWhite, "  show CLI version", resetStyle
-    echo ""
-
-    styledEcho styleBright, fgCyan, "DESCRIPTION", resetStyle
-    styledEcho fgDefault, "    CLI tool that allows changing Zebra printers password", resetStyle
-
-    quit()
+from print import nil
+from config import conf
 
 
 # Error message
@@ -82,7 +31,7 @@ proc usage_help_msg() =
 
         use 'zebra-password-changer help' for help
     ]#
-    let help_text = fmt"use '{config.app_file_name} help' for help"
+    let help_text = fmt"use '{conf.app_file_name} help' for help"
     styledEcho "\n",fgWhite, help_text, resetStyle
 
 
@@ -90,17 +39,17 @@ proc check_arguments() =
     # No any argument ->  Show help
     if paramCount() == 0:
         #error_msg("No operation specified!")
-        print_help()
+        print.help()
 
     # Get all the arguments by index
     for paramIndex in 1 .. paramCount():
         # Argument is "help" -> show help & exit
         if paramStr(1) == "help":
-            print_help()
+            print.help()
 
         # Argument is "version" -> show version & exit
         if paramStr(1) == "version":
-            print_version()
+            print.version()
 
         # Not have 2 argument -> error & exit
         if paramCount() != 2:
@@ -111,10 +60,10 @@ proc check_arguments() =
 
 proc check_ip_and_password(input_ip_address: string, input_password: string) =
     let valid_ip_address = validate.ip_address(input_ip_address)
-    let valid_password   = validate.password(input_password, config.password_total_char)
+    let valid_password   = validate.password(input_password, conf.password_total_char)
 
     let invalid_ip_msg       = "IP adress is invalid!"
-    let invalid_password_msg = fmt"Password is invalid! Please enter a {config.password_total_char} digit number."
+    let invalid_password_msg = fmt"Password is invalid! Please enter a {conf.password_total_char} digit number."
 
     if not valid_ip_address and not valid_password:
         error_msg(invalid_ip_msg)
@@ -145,6 +94,7 @@ proc socket_request(ip_address: string, port: int, timeout: int, zpl_code: strin
 
 
 proc main() =
+
     # Check arguments
     check_arguments()
 
@@ -163,15 +113,15 @@ proc main() =
     # Send the password change request
     socket_request(
         ip_address = input_ip_address,
-        port       = config.printer_port,
-        timeout    = config.socket_timeout,
+        port       = conf.printer_port,
+        timeout    = conf.socket_timeout,
         zpl_code   = fmt_zpl_code
     )
 
 
 when isMainModule:
     # Print the app title
-    styledEcho styleBright, fgMagenta, config.app_title, "\n", resetStyle
+    styledEcho styleBright, fgMagenta, conf.app_title, "\n", resetStyle
 
     main()
 
