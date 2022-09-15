@@ -110,7 +110,7 @@ proc main() =
 
 when isMainModule:
     # Print the app title
-    styledEcho styleBright, fgMagenta, conf.app_title, "\n", resetStyle
+    print.app_title()
 
     main()
 

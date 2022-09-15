@@ -1,6 +1,12 @@
 from config import conf
 import std/[strformat, terminal]
 
+
+# Print the app title
+proc app_title*() =
+    styledEcho styleBright, fgMagenta, conf.app_title, "\n", resetStyle
+
+
 # Prints version and exit
 proc version*() =
     #[
