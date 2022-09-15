@@ -168,10 +168,12 @@ proc main() =
         zpl_code   = fmt_zpl_code
     )
 
-
-when isMainModule:
-    # Print the app title
+# Print the app title
+    proc print_app_title() = 
     styledEcho styleBright, fgMagenta, config.app_title, "\n", resetStyle
 
+when isMainModule:
+    
     main()
+    print_app_title()
 
