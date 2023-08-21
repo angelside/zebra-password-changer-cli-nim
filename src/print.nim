@@ -31,7 +31,7 @@ proc help*() =
             version  show CLI version
 
         DESCRIPTION
-            CLI tool that allows changing Zebra printers password
+            CLI tool that allows changing Zebra printer's password
     ]#
     styledEcho styleBright, fgCyan, "USAGE", resetStyle
     styledEcho fgDefault, fmt"    {conf.app_file_name} <IP_ADDRESS> <PASSWORD>", resetStyle
