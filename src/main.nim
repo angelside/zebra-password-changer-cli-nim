@@ -51,7 +51,7 @@ proc check_ip_and_password(input_ip_address: string, input_password: string) =
     let valid_ip_address = validate.ip_address(input_ip_address)
     let valid_password   = validate.password(input_password, conf.password_total_char)
 
-    let invalid_ip_msg       = "IP adress is invalid!"
+    let invalid_ip_msg       = "IP address is invalid!"
     let invalid_password_msg = fmt"Password is invalid! Please enter a {conf.password_total_char} digit number."
 
     if not valid_ip_address and not valid_password:
