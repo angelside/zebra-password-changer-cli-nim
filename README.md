@@ -1,5 +1,6 @@
 # Zebra Password Changer CLI
 
+[![maintenance-status](https://img.shields.io/badge/maintenance-as--is-yellow.svg?style=for-the-badge)](https://gist.github.com/angelside/364976fbcf7001a5da7e79ad8ed91fec)
 ![Nim](https://img.shields.io/badge/Nim-FFE953.svg?style=for-the-badge&logo=Nim&logoColor=black)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
